@@ -5,16 +5,10 @@ interface ChannelProps {
   data: ChannelResponse;
 }
 
-function Channel({ data }: ChannelProps) {
-  return (
-    <div className="py-8 md:px-14 px-8 max-w-screen-lg mx-auto">
-      <a className="text-light-blue hover:underline" href="/">
-        Back
-      </a>
+// is this component redundant?
 
-      <Programs channelId={data.channel.id} />
-    </div>
-  );
+function Channel({ data }: ChannelProps) {
+  return <Programs channelId={data.channel.id} />;
 }
 
 export default Channel;
