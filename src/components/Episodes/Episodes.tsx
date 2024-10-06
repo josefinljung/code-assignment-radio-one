@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Episode as EpisodeType } from '../../../types/global';
 import Episode from './partials/Episode';
+import { Episode as EpisodeType } from '../../../types/global';
 
 function Episodes() {
   const { programId } = useParams<{ programId: string }>();
   const [episodes, setEpisodes] = useState<EpisodeType[]>([]);
-  const [filteredEpisodes, setFilteredEpisodes] = useState<EpisodeType[]>([]);
-  const [searchValue, setSearchValue] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+  const [filteredEpisodes, setFilteredEpisodes] = useState<EpisodeType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     setIsLoading(true);
@@ -23,14 +20,12 @@ function Episodes() {
           `https://api.sr.se/api/v2/episodes/index?format=json&programid=${programId}`
         );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('No episodes could be found.');
         }
         const data = await response.json();
         setEpisodes(data.episodes);
         setFilteredEpisodes(data.episodes);
 
-        // add loading state for 800ms
-        await delay(800);
         setIsLoading(false);
       } catch (error) {
         setError('Results could not be found');
