@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-
+import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Channel from './components/Channel/Channel';
 import { ChannelResponse } from '.././types/global';
@@ -19,7 +19,7 @@ function App() {
       });
   }, []);
 
-  // is fetching data div necessary
+  // todo: add 404 page
   return (
     <BrowserRouter>
       <Routes>
@@ -28,13 +28,24 @@ function App() {
           path="/channel"
           element={
             channelData ? (
-              <Channel data={channelData} />
+              <>
+                <Header data={channelData} />
+                <Channel data={channelData} />
+              </>
             ) : (
               <div>Fetching data...</div>
             )
           }
         />
-        <Route path="/channel/episodes/:programId" element={<Episodes />} />
+        <Route
+          path="/channel/episodes/:programId"
+          element={
+            <>
+              {channelData ? <Header data={channelData} /> : null}
+              <Episodes />
+            </>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
