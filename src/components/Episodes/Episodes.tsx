@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Episode from './partials/Episode';
+import Heading from '../Heading/Heading';
 import { Episode as EpisodeType } from '../../../types/global';
 
 function Episodes() {
@@ -86,12 +87,12 @@ function Episodes() {
   };
 
   return (
-    <div className="grid gap-y-4">
-      <a href="/channel" className="text-white">
+    <div className="grid gap-y-4 py-8 md:px-14 px-8 max-w-screen-lg mx-auto">
+      <a href="/channel" className="text-light-blue hover:underline">
         Back
       </a>
 
-      <p className="text-pink-600">filter</p>
+      <p className="text-dark-pink">Filter</p>
       <form>
         <input
           type="text"
@@ -101,11 +102,11 @@ function Episodes() {
         />
       </form>
       <div>
-        <p className="text-pink-300 text-xl my-2">Episodes</p>
+        <Heading heading="Episodes" />
         {isLoading ? (
-          <p className="text-white">Loading...</p>
+          <p className="text-common-white">Loading...</p>
         ) : error ? (
-          <p className="text-white">{error}</p>
+          <p className="text-common-white">{error}</p>
         ) : (
           <>
             {filteredEpisodes.map((episode) => {
