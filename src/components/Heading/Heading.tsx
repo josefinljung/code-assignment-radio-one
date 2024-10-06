@@ -4,7 +4,7 @@ interface HeadingProps {
 
 function Heading({ heading }: HeadingProps) {
   return (
-    <h1 className="text-bubblegum-pink text-lg font-semibold">{heading}</h1>
+    <h1 className="text-bubblegum-pink text-4xl font-semibold">{heading}</h1>
   );
 }
 
