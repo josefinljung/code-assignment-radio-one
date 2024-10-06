@@ -11,8 +11,13 @@ function Programs({ channelId }: ProgramsType) {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [programs, setPrograms] = useState<ProgramsResponse>();
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
+    const delayLoading = setTimeout(() => {
+      setShowLoading(true);
+    }, 300);
+
     setIsLoading(true);
     setError('');
     const fetchData = async () => {
@@ -25,29 +30,40 @@ function Programs({ channelId }: ProgramsType) {
         }
         const data = await response.json();
         setPrograms(data);
-
         setIsLoading(false);
+        setShowLoading(false);
+        clearTimeout(delayLoading);
       } catch (error) {
         setError('Results could not be found');
         setIsLoading(false);
+        setShowLoading(false);
+        clearTimeout(delayLoading);
       }
     };
     fetchData();
+
+    return () => clearTimeout(delayLoading);
   }, [channelId]);
 
   return (
-    <div>
-      <Heading heading="Programs" />
+    <div className="grid gap-y-6 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
+      <div className="grid gap-2">
+        <a className="text-light-blue hover:underline text-sm" href="/">
+          Back
+        </a>
 
-      {isLoading ? (
+        <Heading heading="Programs" />
+      </div>
+
+      {isLoading && showLoading ? (
         <p className="text-common-white">Loading...</p>
       ) : error ? (
         <p className="text-common-white">{error}</p>
       ) : (
-        <div className="grid gap-2 pt-8">
+        <div className="grid divide-y divide-light-blue/20">
           {programs?.programs.map((program) => {
             return (
-              <div className="border-b border-light-blue/20">
+              <div className="py-3" key={program.id}>
                 <Program {...program} />
               </div>
             );

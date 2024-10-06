@@ -11,10 +11,16 @@ function Episodes() {
   const [filteredEpisodes, setFilteredEpisodes] = useState<EpisodeType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
+    const delayLoading = setTimeout(() => {
+      setShowLoading(true);
+    }, 300);
+
     setIsLoading(true);
     setError('');
+
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -26,14 +32,19 @@ function Episodes() {
         const data = await response.json();
         setEpisodes(data.episodes);
         setFilteredEpisodes(data.episodes);
-
         setIsLoading(false);
+        setShowLoading(false);
+        clearTimeout(delayLoading);
       } catch (error) {
         setError('Results could not be found');
         setIsLoading(false);
+        setShowLoading(false);
+        clearTimeout(delayLoading);
       }
     };
     fetchData();
+
+    return () => clearTimeout(delayLoading);
   }, [programId]);
 
   // convert date string to timestamp to match episode.publishdateutc format
@@ -87,36 +98,43 @@ function Episodes() {
   };
 
   return (
-    <div className="grid gap-y-4 py-8 md:px-14 px-8 max-w-screen-lg mx-auto">
-      <a href="/channel" className="text-light-blue hover:underline">
-        Back
-      </a>
+    <div className="grid gap-y-6 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
+      <div className="grid gap-2">
+        <a href="/channel" className="text-light-blue hover:underline text-sm">
+          Back
+        </a>
 
-      <p className="text-dark-pink">Filter</p>
-      <form>
-        <input
-          type="text"
-          value={searchValue}
-          onChange={onInputValueChange}
-          onKeyDown={onInputKeyDown}
-        />
-      </form>
-      <div>
         <Heading heading="Episodes" />
-        {isLoading ? (
+      </div>
+
+      <div className="grid gap-3 mt-2">
+        <p className="text-dark-pink font-semibold">Filter</p>
+        <form>
+          <input
+            placeholder="Enter a key word or date"
+            className="w-full bg-dark-gray-blue text-light-blue py-2 px-1.5 text-sm rounded-md border-light-blue border"
+            type="text"
+            value={searchValue}
+            onChange={onInputValueChange}
+            onKeyDown={onInputKeyDown}
+          />
+        </form>
+      </div>
+      <div>
+        {isLoading && showLoading ? (
           <p className="text-common-white">Loading...</p>
         ) : error ? (
           <p className="text-common-white">{error}</p>
         ) : (
-          <>
+          <div className="grid divide-y divide-light-blue/20">
             {filteredEpisodes.map((episode) => {
               return (
-                <div key={episode.id}>
+                <div className="py-3" key={episode.id}>
                   <Episode {...episode} />
                 </div>
               );
             })}
-          </>
+          </div>
         )}
       </div>
     </div>

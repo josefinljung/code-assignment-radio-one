@@ -9,15 +9,40 @@ import Episodes from './components/Episodes/Episodes';
 
 function App() {
   const [channelData, setChannelData] = useState<ChannelResponse>();
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
-    fetch('https://api.sr.se/api/v2/channels/132?format=json')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
+    const delayLoading = setTimeout(() => {
+      setShowLoading(true);
+    }, 300);
+
+    setIsLoading(true);
+    setError('');
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          'https://api.sr.se/api/v2/channels/132?format=json'
+        );
+        if (!response.ok) {
+          throw new Error('No channel could be found.');
+        }
+        const data = await response.json();
         setChannelData(data);
-      });
+        setIsLoading(false);
+        setShowLoading(false);
+        clearTimeout(delayLoading);
+      } catch (error) {
+        setError('Results could not be found');
+        setIsLoading(false);
+        setShowLoading(false);
+        clearTimeout(delayLoading);
+      }
+    };
+    fetchData();
+
+    return () => clearTimeout(delayLoading);
   }, []);
 
   return (
@@ -27,23 +52,31 @@ function App() {
         <Route
           path="/channel"
           element={
-            channelData ? (
+            isLoading && showLoading ? (
+              <p className="text-common-white">Loading...</p>
+            ) : error ? (
+              <p className="text-common-white">{error}</p>
+            ) : channelData ? (
               <>
                 <Header data={channelData} />
                 <Channel data={channelData} />
               </>
-            ) : (
-              <div>Fetching data...</div>
-            )
+            ) : null
           }
         />
         <Route
           path="/channel/episodes/:programId"
           element={
-            <>
-              {channelData ? <Header data={channelData} /> : null}
-              <Episodes />
-            </>
+            isLoading && showLoading ? (
+              <p className="text-common-white">Loading...</p>
+            ) : error ? (
+              <p className="text-common-white">{error}</p>
+            ) : channelData ? (
+              <>
+                <Header data={channelData} />
+                <Episodes />
+              </>
+            ) : null
           }
         />
         <Route path="*" element={<NotFound />} />
