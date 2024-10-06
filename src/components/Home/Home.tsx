@@ -1,5 +1,6 @@
 import Heading from '../Heading/Heading';
 
+// todo: add correct button and styling
 function Home() {
   return (
     <div className="flex h-screen justify-center items-center">

@@ -103,6 +103,7 @@ function Episodes() {
   return (
     <div className="grid gap-y-6 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
       <div className="grid gap-2">
+        {/* todo: add arrow icon */}
         <a href="/channel" className="text-light-blue hover:underline text-sm">
           Back
         </a>
