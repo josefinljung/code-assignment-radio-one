@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Heading from '../Heading/Heading';
 import Program from './partials/Program';
 import { ProgramsResponse } from '../../../types/global';
 
@@ -36,19 +37,19 @@ function Programs({ channelId }: ProgramsType) {
 
   return (
     <div>
-      <h1 className="text-pink-300 text-lg">PROGRAMS</h1>
+      <Heading heading="Programs" />
 
       {isLoading ? (
-        <p className="text-white">Loading...</p>
+        <p className="text-common-white">Loading...</p>
       ) : error ? (
-        <p className="text-white">{error}</p>
+        <p className="text-common-white">{error}</p>
       ) : (
-        <div className="grid gap-2">
+        <div className="grid gap-2 pt-8">
           {programs?.programs.map((program) => {
             return (
-              <a href={`/channel/episodes/${program.id}`} key={program.id}>
+              <div className="border-b border-light-blue/20">
                 <Program {...program} />
-              </a>
+              </div>
             );
           })}
         </div>
