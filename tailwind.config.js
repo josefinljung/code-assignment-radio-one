@@ -10,6 +10,7 @@ module.exports = {
         'bubblegum-pink': 'rgb(240, 162, 209)',
         'light-blue': 'rgb(129, 146, 169)',
         'common-white': 'rgb(255, 255, 255)',
+        'dark-gray-blue': 'rgb(40, 51, 65)',
       },
 
     },
