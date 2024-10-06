@@ -1,5 +1,5 @@
 import Programs from '../Programs/Programs';
-import { ChannelResponse } from '../../../types/global';
+import { ChannelResponse } from '../../types/global';
 
 interface ChannelProps {
   data: ChannelResponse;

@@ -1,4 +1,4 @@
-import { Program as ProgramType } from '../../../../types/global';
+import { Program as ProgramType } from '../../../types/global';
 
 function Program({ ...program }: ProgramType) {
   return (

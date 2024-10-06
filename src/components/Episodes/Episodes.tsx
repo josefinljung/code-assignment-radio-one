@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Episode from './partials/Episode';
 import Heading from '../Heading/Heading';
-import { Episode as EpisodeType } from '../../../types/global';
+import { Episode as EpisodeType } from '../../types/global';
 
 // todo: add "No results found" if user searches
 // for something that doesn't exist

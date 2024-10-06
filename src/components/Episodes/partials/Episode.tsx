@@ -1,4 +1,4 @@
-import { Episode as EpisodeType } from '../../../../types/global';
+import { Episode as EpisodeType } from '../../../types/global';
 
 function Episode({ ...episode }: EpisodeType) {
   return (

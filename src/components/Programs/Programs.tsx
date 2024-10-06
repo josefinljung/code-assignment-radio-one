@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Heading from '../Heading/Heading';
 import Program from './partials/Program';
-import { ProgramsResponse } from '../../../types/global';
+import { ProgramsResponse } from '../../types/global';
 
 interface ProgramsType {
   channelId: number;
