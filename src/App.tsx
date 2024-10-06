@@ -34,7 +34,7 @@ function App() {
             )
           }
         />
-        <Route path="/:programId" element={<Episodes />} />
+        <Route path="/channel/episodes/:programId" element={<Episodes />} />
       </Routes>
     </BrowserRouter>
   );

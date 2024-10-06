@@ -7,6 +7,7 @@ function Episodes() {
   const { programId } = useParams<{ programId: string }>();
   const [episodes, setEpisodes] = useState<EpisodeType[]>([]);
 
+  // todo: add filter
   useEffect(() => {
     fetch(
       `https://api.sr.se/api/v2/episodes/index?format=json&programid=${programId}`
@@ -17,9 +18,11 @@ function Episodes() {
       });
   }, [programId]);
 
-  console.log('episodes', episodes);
   return (
     <div>
+      <a href="/channel" className="text-white">
+        Back
+      </a>
       <p className="text-pink-300 text-xl">Episodes</p>
       {episodes.map((episode) => (
         <div>

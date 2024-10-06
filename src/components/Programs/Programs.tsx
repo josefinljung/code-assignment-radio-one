@@ -20,17 +20,14 @@ function Programs({ channelId }: ProgramsType) {
       });
   }, [channelId]);
 
-  console.log('programs', programs);
-
   return (
     <div>
       <h1 className="text-pink-300 text-lg">PROGRAMS</h1>
-      {/* pass down program data */}
+
       <div className="grid gap-2">
         {programs?.programs.map((program) => {
-          const programIdAsString = program.id.toString();
           return (
-            <a href={programIdAsString}>
+            <a href={`/channel/episodes/${program.id}`}>
               <Program {...program} />
             </a>
           );
