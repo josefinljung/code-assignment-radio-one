@@ -7,10 +7,10 @@ interface ChannelProps {
 
 function Channel({ data }: ChannelProps) {
   return (
-    <div>
-      <p>channel logo</p>
-      <p>info text about channel</p>
-      <p>button to /home</p>
+    <div className="py-8 md:px-14 px-8 max-w-screen-lg mx-auto">
+      <a className="text-light-blue hover:underline" href="/">
+        Back
+      </a>
 
       <Programs channelId={data.channel.id} />
     </div>
