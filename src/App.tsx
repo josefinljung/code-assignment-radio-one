@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+
+import Home from './components/Home/Home';
+import Channel from './components/Channel/Channel';
+import { ChannelResponse } from '.././types/global';
+import Episodes from './components/Episodes/Episodes';
 
 function App() {
+  const [channelData, setChannelData] = useState<ChannelResponse>();
+
+  useEffect(() => {
+    fetch('https://api.sr.se/api/v2/channels/132?format=json')
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setChannelData(data);
+      });
+  }, []);
+
+  // is fetching data div necessary
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/channel"
+          element={
+            channelData ? (
+              <Channel data={channelData} />
+            ) : (
+              <div>Fetching data...</div>
+            )
+          }
+        />
+        <Route path="/:programId" element={<Episodes />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
