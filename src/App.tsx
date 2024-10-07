@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Episodes from './components/Episodes/Episodes';
-import Header from './components/Header/Header';
-import Home from './components/Home/Home';
-import NotFound from './components/NotFound/NotFound';
-import Programs from './components/Programs/Programs';
+import { Episodes, Header, Home, NotFound, Programs } from './components';
 import { ChannelResponse } from './types/global';
 
 function App() {
