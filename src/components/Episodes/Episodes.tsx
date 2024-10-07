@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Episode from './partials/Episode';
 import Heading from '../Heading/Heading';
-import { Episode as EpisodeType } from '../../types/global';
+import { Episode as EpisodeType, EpisodesResponse } from '../../types/global';
 
 // todo: add "No results found" if user searches
 // for something that doesn't exist
@@ -29,22 +29,20 @@ function Episodes() {
         const response = await fetch(
           `https://api.sr.se/api/v2/episodes/index?format=json&programid=${programId}`
         );
-        if (!response.ok) {
-          throw new Error('No episodes could be found.');
-        }
-        const data = await response.json();
+        const data: EpisodesResponse = await response.json();
         setEpisodes(data.episodes);
         setFilteredEpisodes(data.episodes);
         setIsLoading(false);
         setShowLoading(false);
         clearTimeout(delayLoading);
       } catch (error) {
-        setError('Results could not be found');
+        setError('Failed to load episodes.');
         setIsLoading(false);
         setShowLoading(false);
         clearTimeout(delayLoading);
       }
     };
+
     fetchData();
 
     return () => clearTimeout(delayLoading);
@@ -104,11 +102,11 @@ function Episodes() {
     <div className="grid gap-y-6 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
       <div className="grid gap-2">
         {/* todo: add arrow icon */}
-        <a href="/channel" className="text-light-blue hover:underline text-sm">
+        <a href="/channel" className="text-light-blue hover:underline text-md">
           Back
         </a>
 
-        <Heading heading="Episodes" />
+        <Heading heading="Episodes" size="sm" />
       </div>
 
       <div className="grid gap-3 mt-2">
@@ -134,7 +132,7 @@ function Episodes() {
             {filteredEpisodes.map((episode) => {
               return (
                 <div className="py-3" key={episode.id}>
-                  <Episode {...episode} />
+                  <Episode episode={episode} />
                 </div>
               );
             })}
