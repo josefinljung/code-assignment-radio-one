@@ -3,6 +3,8 @@ import Heading from '../Heading/Heading';
 import Program from './partials/Program';
 import { ProgramsResponse } from '../../types/global';
 
+import ArrowBackIcon from '../Icons/ArrowBackIcon';
+
 interface ProgramsType {
   channelId: number;
 }
@@ -20,40 +22,41 @@ function Programs({ channelId }: ProgramsType) {
 
     setIsLoading(true);
     setError('');
+
     const fetchData = async () => {
       try {
         const response = await fetch(
           `https://api.sr.se/api/v2/programs/index?format=json&filter=program.haspod&filtervalue=true&channelid=${channelId}`
         );
-        if (!response.ok) {
-          throw new Error('No programs could be found.');
-        }
-        const data = await response.json();
+        const data: ProgramsResponse = await response.json();
         setPrograms(data);
         setIsLoading(false);
         setShowLoading(false);
         clearTimeout(delayLoading);
       } catch (error) {
-        setError('Results could not be found');
+        setError('Failed to load programs.');
         setIsLoading(false);
         setShowLoading(false);
         clearTimeout(delayLoading);
       }
     };
+
     fetchData();
 
     return () => clearTimeout(delayLoading);
   }, [channelId]);
 
   return (
-    <div className="grid gap-y-6 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
+    <div className="grid gap-y-8 pt-4 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
       <div className="grid gap-2">
-        {/* todo: add arrow icon */}
-        <a className="text-light-blue hover:underline text-sm" href="/">
-          Back
-        </a>
+        <div className="flex gap-2 text-light-blue items-center">
+          <ArrowBackIcon />
+          <a className="hover:underline text-md w-fit -m-2 p-2" href="/">
+            Back
+          </a>
+        </div>
 
-        <Heading heading="Programs" />
+        <Heading heading="Programs" size="sm" />
       </div>
 
       {isLoading && showLoading ? (
@@ -65,7 +68,7 @@ function Programs({ channelId }: ProgramsType) {
           {programs?.programs.map((program) => {
             return (
               <div className="py-3" key={program.id}>
-                <Program {...program} />
+                <Program program={program} />
               </div>
             );
           })}

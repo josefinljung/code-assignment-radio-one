@@ -1,9 +1,13 @@
 import { Program as ProgramType } from '../../../types/global';
 
-function Program({ ...program }: ProgramType) {
+interface ProgramProps {
+  program: ProgramType;
+}
+
+function Program({ program }: ProgramProps) {
   return (
     <a
-      className="grid grid-cols-[80px,1fr] gap-4 items-start"
+      className="grid grid-cols-[80px,1fr] gap-4 items-start group"
       href={`/channel/episodes/${program.id}`}
     >
       <img
@@ -13,7 +17,9 @@ function Program({ ...program }: ProgramType) {
         alt="Program logo"
       />
       <div>
-        <h2 className="text-common-white text-lg">{program.name}</h2>
+        <h2 className="text-common-white text-lg font-semibold group-hover:underline">
+          {program.name}
+        </h2>
         <p className="text-light-blue text-xs">{program.description}</p>
       </div>
     </a>
