@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Episode from './partials/Episode';
 import Heading from '../Heading/Heading';
+import ArrowBackIcon from '../Icons/ArrowBackIcon';
+import Episode from './partials/Episode';
 import { Episode as EpisodeType, EpisodesResponse } from '../../types/global';
 
 // todo: add "No results found" if user searches
@@ -99,10 +100,13 @@ function Episodes() {
   };
 
   return (
-    <div className="grid gap-y-6 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
+    <div className="grid gap-y-8 pb-10 pt-4 md:px-14 px-8 max-w-screen-lg mx-auto">
       <div className="grid gap-2">
-        {/* todo: add arrow icon */}
-        <a href="/channel" className="text-light-blue hover:underline text-md">
+        <a
+          href="/channel"
+          className="hover:underline text-md flex gap-2 text-light-blue items-center -my-2 py-2 w-fit"
+        >
+          <ArrowBackIcon />
           Back
         </a>
 

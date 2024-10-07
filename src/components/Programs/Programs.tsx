@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import Heading from '../Heading/Heading';
+import ArrowBackIcon from '../Icons/ArrowBackIcon';
 import Program from './partials/Program';
 import { ProgramsResponse } from '../../types/global';
-
-import ArrowBackIcon from '../Icons/ArrowBackIcon';
 
 interface ProgramsType {
   channelId: number;
@@ -49,12 +48,13 @@ function Programs({ channelId }: ProgramsType) {
   return (
     <div className="grid gap-y-8 pt-4 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
       <div className="grid gap-2">
-        <div className="flex gap-2 text-light-blue items-center">
+        <a
+          className="hover:underline text-md w-fit text-md flex gap-2 text-light-blue items-center -my-2 py-2"
+          href="/"
+        >
           <ArrowBackIcon />
-          <a className="hover:underline text-md w-fit -m-2 p-2" href="/">
-            Back
-          </a>
-        </div>
+          Back
+        </a>
 
         <Heading heading="Programs" size="sm" />
       </div>
