@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Program as ProgramType } from '../../../types/global';
 
 interface ProgramProps {
@@ -6,9 +7,9 @@ interface ProgramProps {
 
 function Program({ program }: ProgramProps) {
   return (
-    <a
+    <Link
       className="flex gap-4 items-start group"
-      href={`/channel/episodes/${program.id}`}
+      to={`/channel/episodes/${program.id}`}
     >
       <img
         src={program.programimage}
@@ -30,7 +31,7 @@ function Program({ program }: ProgramProps) {
           {program.description}
         </p>
       </div>
-    </a>
+    </Link>
   );
 }
 
