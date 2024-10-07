@@ -7,7 +7,7 @@ interface ProgramProps {
 function Program({ program }: ProgramProps) {
   return (
     <a
-      className="grid grid-cols-[80px,1fr] gap-4 items-start group"
+      className="flex gap-4 items-start group"
       href={`/channel/episodes/${program.id}`}
     >
       <img
@@ -17,10 +17,18 @@ function Program({ program }: ProgramProps) {
         alt="Program logo"
       />
       <div>
-        <h2 className="text-common-white text-lg font-semibold group-hover:underline">
+        <h2
+          className="text-common-white break-words text-lg font-semibold group-hover:underline"
+          style={{ wordBreak: 'break-word' }}
+        >
           {program.name}
         </h2>
-        <p className="text-light-blue text-xs">{program.description}</p>
+        <p
+          style={{ wordBreak: 'break-word' }}
+          className="text-light-blue text-xs"
+        >
+          {program.description}
+        </p>
       </div>
     </a>
   );
