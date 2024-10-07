@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Heading from '../Heading/Heading';
-import ArrowBackIcon from '../Icons/ArrowBackIcon';
-import Program from './partials/Program';
+import { ArrowBackIcon, Heading } from '../../components';
 import { ProgramsResponse } from '../../types/global';
+import Program from './partials/Program';
 
 interface ProgramsType {
   channelId: number;

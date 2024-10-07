@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import PlayIcon from '../Icons/PlayIcon';
-import Heading from '../Heading/Heading';
+import { Heading, PlayIcon } from '../../components';
 
 function Home() {
   return (

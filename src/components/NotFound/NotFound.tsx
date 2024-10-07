@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Heading from './../Heading/Heading';
+import { Heading } from '../../components';
 
 function NotFound() {
   return (

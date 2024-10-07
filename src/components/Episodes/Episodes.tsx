@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Heading } from '../../components';
-import Episode from './partials/Episode';
-import ArrowBackIcon from '../Icons/ArrowBackIcon';
+import { ArrowBackIcon, Heading } from '../../components';
 import { Episode as EpisodeType, EpisodesResponse } from '../../types/global';
+import Episode from './partials/Episode';
 
 // todo: Add "No results found" if user searches for something that doesn't exist
 // todo: Add label to input for screen readers. How to make screen readers
