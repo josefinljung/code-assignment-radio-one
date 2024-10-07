@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Heading from '../Heading/Heading';
 import ArrowBackIcon from '../Icons/ArrowBackIcon';
 import Program from './partials/Program';
@@ -48,13 +49,13 @@ function Programs({ channelId }: ProgramsType) {
   return (
     <div className="grid gap-y-8 pt-4 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
       <div className="grid gap-2">
-        <a
+        <Link
           className="hover:underline text-md w-fit text-md flex gap-2 text-light-blue items-center -my-2 py-2"
-          href="/"
+          to="/"
         >
           <ArrowBackIcon />
           Back
-        </a>
+        </Link>
 
         <Heading heading="Programs" size="sm" />
       </div>
@@ -64,15 +65,15 @@ function Programs({ channelId }: ProgramsType) {
       ) : error ? (
         <p className="text-common-white">{error}</p>
       ) : (
-        <div className="grid divide-y divide-light-blue/20">
+        <ul className="grid divide-y divide-light-blue/20">
           {programs?.programs.map((program) => {
             return (
-              <div className="py-3" key={program.id}>
+              <li className="py-3" key={program.id}>
                 <Program program={program} />
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       )}
     </div>
   );
