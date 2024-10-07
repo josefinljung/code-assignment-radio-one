@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PlayIcon from '../Icons/PlayIcon';
 import Heading from '../Heading/Heading';
 
@@ -11,12 +12,12 @@ function Home() {
           </div>
           <Heading heading="Radio app" size="lg" />
         </div>
-        <a
-          href="/channel"
+        <Link
+          to="/channel"
           className="ease-in-out duration-100 hover:scale-105 transform-scale shadow-[0_0px_700px_-5px_rgba(130,0,255)] bg-gradient-to-r from-dark-pink to-dark-purple rounded-xl text-common-white text-xl  lg:text-xs font-semibold w-max py-4 lg:px-6 px-7 h-fit"
         >
           Get started
-        </a>
+        </Link>
       </div>
     </div>
   );
