@@ -1,4 +1,4 @@
-import { Channel } from '../../types/global';
+import { Channel } from '~/types/global';
 
 interface HeaderProps {
   channel: Channel;

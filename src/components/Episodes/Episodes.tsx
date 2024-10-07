@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { Episode as EpisodeType, EpisodesResponse } from '~/types/global';
 import { ArrowBackIcon, Heading } from '../../components';
-import { Episode as EpisodeType, EpisodesResponse } from '../../types/global';
 import Episode from './partials/Episode';
 
 // todo: Add "No results found" if user searches for something that doesn't exist

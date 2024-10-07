@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Program as ProgramType } from '../../../types/global';
+import { Program as ProgramType } from '~/types/global';
 
 interface ProgramProps {
   program: ProgramType;

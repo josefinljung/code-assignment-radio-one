@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ProgramsResponse } from '~/types/global';
 import { ArrowBackIcon, Heading } from '../../components';
-import { ProgramsResponse } from '../../types/global';
 import Program from './partials/Program';
 
 interface ProgramsType {

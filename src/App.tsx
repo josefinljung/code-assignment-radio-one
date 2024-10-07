@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { ChannelResponse } from '~/types/global';
 import { Episodes, Header, Home, NotFound, Programs } from './components';
-import { ChannelResponse } from './types/global';
 
 function App() {
   const [channelData, setChannelData] = useState<ChannelResponse>();
