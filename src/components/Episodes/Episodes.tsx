@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Heading from '../Heading/Heading';
-import ArrowBackIcon from '../Icons/ArrowBackIcon';
+import { Link, useParams } from 'react-router-dom';
+import { Heading } from '../../components';
 import Episode from './partials/Episode';
+import ArrowBackIcon from '../Icons/ArrowBackIcon';
 import { Episode as EpisodeType, EpisodesResponse } from '../../types/global';
 
-// todo: add "No results found" if user searches
-// for something that doesn't exist
+// todo: Add "No results found" if user searches for something that doesn't exist
+// todo: Add label to input for screen readers. How to make screen readers
+//       aware of results being rendered beneath input?
 
 function Episodes() {
   const { programId } = useParams<{ programId: string }>();
@@ -102,13 +103,13 @@ function Episodes() {
   return (
     <div className="grid gap-y-8 pb-10 pt-4 md:px-14 px-8 max-w-screen-lg mx-auto">
       <div className="grid gap-2">
-        <a
-          href="/channel"
+        <Link
+          to="/channel"
           className="hover:underline text-md flex gap-2 text-light-blue items-center -my-2 py-2 w-fit"
         >
           <ArrowBackIcon />
           Back
-        </a>
+        </Link>
 
         <Heading heading="Episodes" size="sm" />
       </div>
@@ -132,15 +133,15 @@ function Episodes() {
         ) : error ? (
           <p className="text-common-white">{error}</p>
         ) : (
-          <div className="grid divide-y divide-light-blue/20">
+          <ul className="grid divide-y divide-light-blue/20">
             {filteredEpisodes.map((episode) => {
               return (
-                <div className="py-3" key={episode.id}>
+                <li className="py-3" key={episode.id}>
                   <Episode episode={episode} />
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         )}
       </div>
     </div>
