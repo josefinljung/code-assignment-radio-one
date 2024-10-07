@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import Episodes from './components/Episodes/Episodes';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
-import Channel from './components/Channel/Channel';
 import NotFound from './components/NotFound/NotFound';
+import Programs from './components/Programs/Programs';
 import { ChannelResponse } from './types/global';
-import Episodes from './components/Episodes/Episodes';
 
 function App() {
   const [channelData, setChannelData] = useState<ChannelResponse>();
@@ -58,7 +58,7 @@ function App() {
             ) : channelData ? (
               <>
                 <Header channel={channelData.channel} />
-                <Channel data={channelData} />
+                <Programs channelId={channelData.channel.id} />
               </>
             ) : null
           }
