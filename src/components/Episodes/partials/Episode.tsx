@@ -17,10 +17,18 @@ function Episode({ episode }: EpisodeProps) {
         className="h-[80px] w-fit"
       />
       <div>
-        <h2 className="text-common-white text-lg font-semibold">
+        <h2
+          className="text-common-white text-lg font-semibold"
+          style={{ wordBreak: 'break-word' }}
+        >
           {episode.title}
         </h2>
-        <p className="text-light-blue text-xs">{episode.description}</p>
+        <p
+          className="text-light-blue text-xs"
+          style={{ wordBreak: 'break-word' }}
+        >
+          {episode.description}
+        </p>
         {episode.listenpodfile && (
           <audio
             controls
