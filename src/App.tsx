@@ -20,26 +20,25 @@ function App() {
 
     setIsLoading(true);
     setError('');
+
     const fetchData = async () => {
       try {
         const response = await fetch(
           'https://api.sr.se/api/v2/channels/132?format=json'
         );
-        if (!response.ok) {
-          throw new Error('No channel could be found.');
-        }
-        const data = await response.json();
+        const data: ChannelResponse = await response.json();
         setChannelData(data);
         setIsLoading(false);
         setShowLoading(false);
         clearTimeout(delayLoading);
       } catch (error) {
-        setError('Results could not be found');
+        setError('No channel could be found.');
         setIsLoading(false);
         setShowLoading(false);
         clearTimeout(delayLoading);
       }
     };
+
     fetchData();
 
     return () => clearTimeout(delayLoading);
@@ -58,7 +57,7 @@ function App() {
               <p className="text-common-white">{error}</p>
             ) : channelData ? (
               <>
-                <Header data={channelData} />
+                <Header channel={channelData.channel} />
                 <Channel data={channelData} />
               </>
             ) : null
@@ -73,7 +72,7 @@ function App() {
               <p className="text-common-white">{error}</p>
             ) : channelData ? (
               <>
-                <Header data={channelData} />
+                <Header channel={channelData.channel} />
                 <Episodes />
               </>
             ) : null
