@@ -4,10 +4,6 @@ import { Episode as EpisodeType, EpisodesResponse } from '~/types/global';
 import { ArrowBackIcon, Heading } from '../../components';
 import Episode from './partials/Episode';
 
-// todo: Add "No results found" if user searches for something that doesn't exist
-// todo: Add label to input for screen readers. How to make screen readers
-//       aware of results being rendered beneath input?
-
 function Episodes() {
   const { programId } = useParams<{ programId: string }>();
   const [episodes, setEpisodes] = useState<EpisodeType[]>([]);
@@ -80,6 +76,7 @@ function Episodes() {
 
   const filterByDate = (value: string) => {
     const inputDate = new Date(value).getTime();
+    console.log('här loggas det');
     return episodes
       .filter(
         (episode) => extractTimestamp(episode.publishdateutc) >= inputDate
@@ -103,8 +100,8 @@ function Episodes() {
     <div className="grid gap-y-8 pb-10 pt-4 md:px-14 px-8 max-w-screen-lg mx-auto">
       <div className="grid gap-2">
         <Link
-          to="/channel"
           className="hover:underline text-md flex gap-2 text-light-blue items-center -my-2 py-2 w-fit"
+          to="/channel"
         >
           <ArrowBackIcon />
           Back
@@ -116,13 +113,18 @@ function Episodes() {
       <div className="grid gap-3 mt-2">
         <p className="text-dark-pink font-semibold">Filter</p>
         <form>
+          <label className="sr-only" htmlFor="episode-search-input">
+            Search for episodes
+          </label>
           <input
-            placeholder="Enter a key word or date"
+            aria-controls="episodes-list"
             className="w-full bg-dark-gray-blue text-light-blue py-2 px-1.5 text-sm rounded-md border-light-blue border"
-            type="text"
-            value={searchValue}
+            id="episode-search-input"
             onChange={onInputValueChange}
             onKeyDown={onInputKeyDown}
+            placeholder="Enter a key word or date"
+            type="text"
+            value={searchValue}
           />
         </form>
       </div>
@@ -131,8 +133,16 @@ function Episodes() {
           <p className="text-common-white">Loading...</p>
         ) : error ? (
           <p className="text-common-white">{error}</p>
+        ) : filteredEpisodes.length === 0 ? (
+          <p className="text-common-white">No results found.</p>
         ) : (
-          <ul className="grid divide-y divide-light-blue/20">
+          <ul
+            aria-atomic="true"
+            aria-busy={isLoading}
+            aria-live="polite"
+            className="grid divide-y divide-light-blue/20"
+            id="episodes-list"
+          >
             {filteredEpisodes.map((episode) => {
               return (
                 <li className="py-3" key={episode.id}>
