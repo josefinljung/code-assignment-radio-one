@@ -11,12 +11,7 @@ function Program({ program }: ProgramProps) {
       className="flex gap-4 items-start group"
       to={`/channel/episodes/${program.id}`}
     >
-      <img
-        src={program.programimage}
-        className="h-[80px] w-fit"
-        role="presentation"
-        alt="Program logo"
-      />
+      <img src={program.programimage} className="h-[80px] w-fit" alt="" />
       <div>
         <h2
           className="text-common-white break-words text-lg font-semibold group-hover:underline"

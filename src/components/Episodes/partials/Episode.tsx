@@ -11,11 +11,7 @@ interface EpisodeProps {
 function Episode({ episode }: EpisodeProps) {
   return (
     <div className="grid md:grid-cols-[80px,1fr] gap-4 items-start">
-      <img
-        src={episode.imageurl}
-        alt="Episode cover"
-        className="h-[80px] w-fit"
-      />
+      <img src={episode.imageurl} alt="" className="h-[80px] w-fit" />
       <div>
         <h2
           className="text-common-white text-lg font-semibold"

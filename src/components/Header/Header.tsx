@@ -10,7 +10,7 @@ function Header({ channel }: HeaderProps) {
       <img
         className="max-md:h-[calc(100vw/4)] min-h-[50px] max-h-[100px] h-[100px] w-fit"
         src={channel.image}
-        alt={`${channel.name} logo`}
+        alt=""
       />
       <p className="text-light-blue">{channel.tagline}</p>
     </div>
