@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --common-white: rgb(255, 255, 255);
+  --dark-blue: rgb(13, 18, 32);
+  --dark-gray-blue: rgb(40, 51, 65);
+  --dark-pink: rgb(206, 8, 100);
+  --dark-purple: rgb(75, 10, 130);
+  --light-blue: rgb(129, 146, 169);
+  --light-pink: rgb(240, 162, 209);
+}
+
 body {
-  background-color: rgb(13, 18, 32);
+  background-color: var(--dark-blue);
 }
