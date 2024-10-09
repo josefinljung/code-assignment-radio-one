@@ -56,13 +56,6 @@ function Episodes() {
     filterEpisodes(value);
   };
 
-  const onInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      filterEpisodes(searchValue);
-    }
-  };
-
   const filterEpisodes = (value: string) => {
     if (!value) {
       setFilteredEpisodes(episodes);
@@ -76,7 +69,7 @@ function Episodes() {
 
   const filterByDate = (value: string) => {
     const inputDate = new Date(value).getTime();
-    console.log('här loggas det');
+
     return episodes
       .filter(
         (episode) => extractTimestamp(episode.publishdateutc) >= inputDate
@@ -97,7 +90,7 @@ function Episodes() {
   };
 
   return (
-    <div className="grid gap-y-8 pb-10 pt-4 md:px-14 px-8 max-w-screen-lg mx-auto">
+    <main className="grid gap-y-8 pb-10 pt-4 md:px-14 px-8 max-w-screen-xl mx-auto">
       <div className="grid gap-2">
         <Link
           className="hover:underline text-md flex gap-2 text-light-blue items-center -my-2 py-2 w-fit"
@@ -110,7 +103,7 @@ function Episodes() {
         <Heading heading="Episodes" size="sm" />
       </div>
 
-      <div className="grid gap-3 mt-2">
+      <section aria-label="Filter section" className="grid gap-3 mt-2">
         <p className="text-dark-pink font-semibold">Filter</p>
         <form>
           <label className="sr-only" htmlFor="episode-search-input">
@@ -121,39 +114,41 @@ function Episodes() {
             className="w-full bg-dark-gray-blue text-light-blue py-2 px-1.5 text-sm rounded-md border-light-blue border"
             id="episode-search-input"
             onChange={onInputValueChange}
-            onKeyDown={onInputKeyDown}
             placeholder="Enter a key word or date"
             type="text"
             value={searchValue}
           />
         </form>
-      </div>
-      <div>
-        {isLoading && showLoading ? (
-          <p className="text-common-white">Loading...</p>
-        ) : error ? (
-          <p className="text-common-white">{error}</p>
-        ) : filteredEpisodes.length === 0 ? (
-          <p className="text-common-white">No results found.</p>
-        ) : (
-          <ul
-            aria-atomic="true"
-            aria-busy={isLoading}
-            aria-live="polite"
-            className="grid divide-y divide-light-blue/20"
-            id="episodes-list"
-          >
-            {filteredEpisodes.map((episode) => {
-              return (
-                <li className="py-3" key={episode.id}>
-                  <Episode episode={episode} />
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
-    </div>
+      </section>
+
+      {searchValue && filteredEpisodes.length !== 0 && (
+        <p aria-live="polite" className="sr-only">
+          {filteredEpisodes.length} search results for "{searchValue}"
+        </p>
+      )}
+
+      {isLoading && showLoading ? (
+        <p className="text-common-white">Loading...</p>
+      ) : error ? (
+        <p className="text-common-white">{error}</p>
+      ) : filteredEpisodes.length === 0 ? (
+        <p className="text-common-white">No results found.</p>
+      ) : (
+        <ul
+          className="grid divide-y divide-light-blue-20"
+          id="episodes-list"
+          aria-label="Episodes"
+        >
+          {filteredEpisodes.map((episode) => {
+            return (
+              <li className="py-3" key={episode.id} aria-label={episode.title}>
+                <Episode episode={episode} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </main>
   );
 }
 

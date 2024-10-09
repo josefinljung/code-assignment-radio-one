@@ -13,6 +13,7 @@ module.exports = {
         'dark-purple': 'var(--dark-purple)',
         'light-blue': 'var(--light-blue)',
         'light-pink': 'var(--light-pink)',
+        'light-blue-20': 'var(--light-blue-20)',
       },
 
     },
