@@ -46,7 +46,7 @@ function Programs({ channelId }: ProgramsType) {
   }, [channelId]);
 
   return (
-    <div className="grid gap-y-8 pt-4 pb-10 md:px-14 px-8 max-w-screen-lg mx-auto">
+    <main className="grid gap-y-8 pt-4 pb-10 md:px-14 px-8 max-w-screen-xl mx-auto">
       <div className="grid gap-2">
         <Link
           className="hover:underline text-md w-fit text-md flex gap-2 text-light-blue items-center -my-2 py-2"
@@ -64,17 +64,20 @@ function Programs({ channelId }: ProgramsType) {
       ) : error ? (
         <p className="text-common-white">{error}</p>
       ) : (
-        <ul className="grid divide-y divide-light-blue/20">
+        <ul
+          className="grid divide-y divide-light-blue-20"
+          aria-label="Programs"
+        >
           {programs?.programs.map((program) => {
             return (
-              <li className="py-3" key={program.id}>
+              <li className="py-3" key={program.id} aria-label={program.name}>
                 <Program program={program} />
               </li>
             );
           })}
         </ul>
       )}
-    </div>
+    </main>
   );
 }
 
