@@ -10,7 +10,7 @@ function Heading({ heading, size }: HeadingProps) {
     <h1
       className={classNames('text-light-pink text- font-semibold', {
         'text-3xl': size === 'sm',
-        'lg:text-5xl text-6xl': size === 'lg',
+        'md:text-5xl text-6xl': size === 'lg',
       })}
     >
       {heading}
