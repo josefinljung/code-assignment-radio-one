@@ -28,7 +28,7 @@ function Episode({ episode }: EpisodeProps) {
         {episode.listenpodfile && (
           <audio
             controls
-            className="mt-4 w-full"
+            className="mt-4 w-full md:w-3/5"
             src={episode.listenpodfile.url}
           />
         )}
