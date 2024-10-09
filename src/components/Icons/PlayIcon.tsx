@@ -2,10 +2,11 @@ function PlayIcon() {
   return (
     <svg
       fill="none"
+      role="presentation"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="lg:size-6 size-8 text-dark-pink"
+      className="md:size-6 size-8 text-dark-pink"
     >
       <path
         strokeLinecap="round"
